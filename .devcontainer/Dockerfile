@@ -101,5 +101,6 @@ RUN [ "/bin/bash" , "-c" , " \
 # Set up auto-source of workspace for ros user
 RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bashrc \
   && echo "export PATH=/home/$USERNAME/.local/lib/python3.10/site-packages:\$PATH" >> /home/$USERNAME/.bashrc \
-  && echo "source /opt/ros/humble/setup.bash" >> /home/$USERNAME/.bashrc
+  && echo "source /opt/ros/humble/setup.bash" >> /home/$USERNAME/.bashrc \
+  && echo "export GZ_VERSION=garden" >> /home/$USERNAME/.bashrc 
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc
