@@ -2,3 +2,8 @@ build/*
 install/*
 log/*
 site/*
+logs/*
+*.BIN
+*.bin
+*.tlog
+*.raw
