@@ -57,7 +57,8 @@ def generate_launch_description():
     sim_right_ini = os.path.join(multiorca_dir, 'cfg', 'sim_right.ini')
 
     rov_ns = 'rov1'
-     # Start Gazebo with default underwater world
+
+    # Start Gazebo with default underwater world
     spawn_world_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'start_gz_sim.launch.py'))                       
         )
@@ -83,8 +84,8 @@ def generate_launch_description():
     start_gz_brdg_cmd = Node(
             package="ros_gz_bridge",
             executable="parameter_bridge",
-            name="gz_brg_rov1",
-            # namespace=rov_ns,
+            name=f"gz_brdg_{rov_ns}", #  "gz_brg_rov1",
+            # namespace=rov_ns,  # not directly using Namespace
             parameters=[
                 {
                     "config_file": os.path.join(
@@ -100,8 +101,9 @@ def generate_launch_description():
     start_img_brdg_node_cmd = Node(
             package='ros_gz_image',
             executable='image_bridge',
-            name="gz_img_brg_rov1",
-            arguments=['rov1/stereo_left', 'rov1/stereo_right'],  # need to add more image topics as the number of ROVs increases. NO namespace required            
+            name=f"gz_im_brdg_{rov_ns}", #name="gz_img_brg_rov1",
+            # arguments=['rov1/stereo_left', 'rov1/stereo_right'],  # need to add more image topics as the number of ROVs increases. NO namespace required            
+            arguments=[f"{rov_ns}/stereo_left", f"{rov_ns}/stereo_right"],
             output='screen',
         )
     
@@ -208,7 +210,7 @@ def generate_launch_description():
             executable='camera_info_publisher',
             name='left_info_publisher',
             output='screen',
-            namespace='rov1',
+            namespace=rov_ns,
             parameters=[{
                 'camera_info_url': 'file://' + sim_left_ini,
                 'camera_name': 'stereo_left',
@@ -225,7 +227,7 @@ def generate_launch_description():
             executable='camera_info_publisher',
             name='right_info_publisher',
             output='screen',
-            namespace='rov1',
+            namespace=rov_ns,
             parameters=[{
                 'camera_info_url': 'file://' + sim_right_ini,
                 'camera_name': 'stereo_right',
@@ -243,6 +245,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'bringup.py')),
             launch_arguments={
+                'namespace':rov_ns,
                 'base': LaunchConfiguration('base'),
                 'mavros': LaunchConfiguration('mavros'),
                 'mavros_params_file': mavros_params_file,

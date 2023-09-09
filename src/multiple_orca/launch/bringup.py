@@ -66,7 +66,7 @@ def generate_launch_description():
 
     configured_nav2_params = RewrittenYaml(
         source_file=nav2_params_file,
-        root_key='',   #namespace compatible  NEED TO CHECK
+        root_key='',   
         param_rewrites={
             'default_nav_to_pose_bt_xml': nav2_bt_file,
         },
@@ -92,9 +92,16 @@ def generate_launch_description():
     # input("Press Enter to continue...")
     # for debugging end
 
+    namespace = LaunchConfiguration('namespace')
+
     return LaunchDescription([
         print_cmd,
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
+        DeclareLaunchArgument(
+            'namespace',
+            default_value='',
+            description='Top-level namespace'
+        ),
 
         DeclareLaunchArgument(
             'base',
@@ -150,7 +157,7 @@ def generate_launch_description():
             output='screen',
             name='manager',
             parameters=[orca_params_file],
-            namespace = "rov1",
+            namespace = namespace,
             remappings=[
                 # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
                 ('camera_pose', 'orb_slam2_stereo_node/pose'),
@@ -165,7 +172,7 @@ def generate_launch_description():
             output='screen',
             name='base_controller',
             parameters=[orca_params_file],
-            namespace = "rov1",
+            namespace = namespace,
             remappings=[
                 # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
                 ('camera_pose', 'orb_slam2_stereo_node/pose'),
@@ -228,7 +235,7 @@ def generate_launch_description():
             executable='orb_slam2_ros_stereo',
             output='screen',
             name='orb_slam2_stereo',
-            namespace = 'rov1',
+            namespace = namespace,
             parameters=[orca_params_file, {
                 'voc_file': orb_voc_file,
             }],
@@ -244,7 +251,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'navigation_launch.py')),
             launch_arguments={
-                'namespace': 'rov1',
+                'namespace': namespace,
                 'use_sim_time': 'False',
                 'autostart': 'False',
                 'params_file': configured_nav2_params,
