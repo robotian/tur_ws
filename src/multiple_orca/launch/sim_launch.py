@@ -56,16 +56,20 @@ def generate_launch_description():
     sim_left_ini = os.path.join(multiorca_dir, 'cfg', 'sim_left.ini')
     sim_right_ini = os.path.join(multiorca_dir, 'cfg', 'sim_right.ini')
 
-    rov_ns = 'rov1'
+    # check if you have all the parameter files and models before changing the namespace
+    rov_ns = 'rov2'  
+
+    remappings = [('/tf', 'tf'),
+                  ('/tf_static', 'tf_static')] 
 
     # Start Gazebo with default underwater world
     spawn_world_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'start_gz_sim.launch.py'))                       
         )
     # spawn rov sdf model
-    sdf_filepath = os.path.join(multiorca_dir, 'models', 'rov1', 'model.sdf')   
+    sdf_filepath = os.path.join(multiorca_dir, 'models', rov_ns, 'model.sdf')   
     opt_str = ['sdf_filename:"{name}"'.format(name=sdf_filepath),
-                   'name:"{rov_name}"'.format(rov_name='rov1'), 
+                   'name:"{rov_name}"'.format(rov_name=rov_ns), 
                    'pose:{position:{',
                    'x:', '0.0',
                    ',y:', '0.0',
@@ -94,6 +98,7 @@ def generate_launch_description():
                     "qos_overrides./tf_static.publisher.durability": "transient_local",
                 }
             ],
+            remappings=remappings,
             output="screen",
         )
     
@@ -104,12 +109,18 @@ def generate_launch_description():
             name=f"gz_im_brdg_{rov_ns}", #name="gz_img_brg_rov1",
             # arguments=['rov1/stereo_left', 'rov1/stereo_right'],  # need to add more image topics as the number of ROVs increases. NO namespace required            
             arguments=[f"{rov_ns}/stereo_left", f"{rov_ns}/stereo_right"],
+            remappings=remappings,
             output='screen',
         )
     
 
     return LaunchDescription([
         print_cmd,
+        DeclareLaunchArgument(
+            'namespace',
+            default_value=rov_ns,
+            description='Define namespace'
+        ),
         DeclareLaunchArgument(
             'ardusub',
             default_value='True',
@@ -195,7 +206,7 @@ def generate_launch_description():
         # ardusub must be on the $PATH, see src/orca4/setup.bash
         ExecuteProcess(
             cmd=['ardusub', '-S', '-w', '-M', 'JSON', '--defaults', ardusub_params_file,
-                 '-I0', '--home', '33.810313,-118.39386700000001,0.0,270.0'],
+                 '-I1', '--home', '33.810313,-118.39386700000001,0.0,270.0'],
             output='screen',
             condition=IfCondition(LaunchConfiguration('ardusub')),
         ),
@@ -219,6 +230,7 @@ def generate_launch_description():
             }],
             remappings=[
                 ('camera_info', 'stereo_left/camera_info'),
+                tuple(remappings),
             ],
         ),
 
@@ -236,6 +248,7 @@ def generate_launch_description():
             }],
             remappings=[
                 ('camera_info', 'stereo_right/camera_info'),
+                tuple(remappings),
             ],
         ),
 
@@ -246,7 +259,9 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'bringup.py')),
             launch_arguments={
                 'namespace':rov_ns,
+                # 'namespace':LaunchConfiguration('namespace'),
                 'base': LaunchConfiguration('base'),
+                'mavros_ns':f"{rov_ns}/mavros",
                 'mavros': LaunchConfiguration('mavros'),
                 'mavros_params_file': mavros_params_file,
                 'nav': LaunchConfiguration('nav'),

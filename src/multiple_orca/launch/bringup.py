@@ -33,21 +33,43 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, SetEnvironmentVariable, LogInfo
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription, SetEnvironmentVariable, LogInfo, OpaqueFunction
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from nav2_common.launch import RewrittenYaml
 
+from launch_ros.actions import ComposableNodeContainer
+from launch_ros.descriptions import ComposableNode
+from launch.substitutions import TextSubstitution
 from launch.launch_context import LaunchContext
-import yaml
+# import yaml
+
+def launch_setup(context, *args, **kwargs):
+    arg_namespace = context.perform_substitution(LaunchConfiguration('namespace'))
+    mavros_params_file = LaunchConfiguration('mavros_params_file')
+    start_mav_node = Node(
+                package='mavros',
+                executable='mavros_node',
+                output='screen',
+                # mavros_node is actually many nodes, so we can't override the name
+                # name='mavros_node',
+                # namespace='rov1/mavros',
+                namespace=f"{arg_namespace}/mavros",
+                parameters=[mavros_params_file],            
+                remappings=[('/tf', f"/{arg_namespace}/tf"),
+                    ('/tf_static', f"/{arg_namespace}/tf_static")] ,
+                condition=IfCondition(LaunchConfiguration('mavros')),
+            )
+    return [start_mav_node]
+
+
 
 def generate_launch_description():
-    # print("bringup launch start")
+    
     print_cmd = LogInfo(msg="bringup Launch Start")
     multiorca_dir = get_package_share_directory('multiple_orca')
-    # orca_bringup_dir = get_package_share_directory('orca_bringup')
     nav2_bt_file = os.path.join(multiorca_dir, 'behavior_trees', 'orca4_bt.xml')
     nav2_params_file = os.path.join(multiorca_dir, 'params', 'nav2_params.yaml')
 
@@ -55,6 +77,7 @@ def generate_launch_description():
     mavros_params_file = LaunchConfiguration('mavros_params_file')
     orca_params_file = LaunchConfiguration('orca_params_file')
 
+    
     # get_package_share_directory('orb_slam2_ros') will fail if orb_slam2_ros isn't installed
     orb_voc_file = os.path.join('install', 'orb_slam2_ros', 'share', 'orb_slam2_ros',
                                 'orb_slam2', 'Vocabulary', 'ORBvoc.txt')
@@ -71,6 +94,9 @@ def generate_launch_description():
             'default_nav_to_pose_bt_xml': nav2_bt_file,
         },
         convert_types=True)   
+    
+    remappings = [('/tf', 'tf'),
+                  ('/tf_static', 'tf_static')] 
     
     # for debugging start
     # context = LaunchContext()
@@ -93,19 +119,22 @@ def generate_launch_description():
     # for debugging end
 
     namespace = LaunchConfiguration('namespace')
+    mavros_ns = LaunchConfiguration('mavros_ns')
+    
 
     return LaunchDescription([
         print_cmd,
+        # wtf,
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
         DeclareLaunchArgument(
             'namespace',
-            default_value='',
+            default_value=TextSubstitution(text=""),
             description='Top-level namespace'
         ),
 
         DeclareLaunchArgument(
             'base',
-            default_value='True',
+            default_value=TextSubstitution(text="True"),
             description='Launch base controller?',
         ),
 
@@ -138,17 +167,31 @@ def generate_launch_description():
             default_value='True',
             description='Launch SLAM?',
         ),
+        DeclareLaunchArgument(
+            'mavros_ns',
+            default_value='',
+            description='Separate namespace for mavros'
+        ),
+
+        OpaqueFunction(function=launch_setup),  # mavros node
+        
 
         # Translate messages MAV <-> ROS
-        Node(
-            package='mavros',
-            executable='mavros_node',
-            output='screen',
-            # mavros_node is actually many nodes, so we can't override the name
-            # name='mavros_node',
-            parameters=[mavros_params_file],
-            condition=IfCondition(LaunchConfiguration('mavros')),
-        ),
+        # Node(
+        #     package='mavros',
+        #     executable='mavros_node',
+        #     output='screen',
+        #     # mavros_node is actually many nodes, so we can't override the name
+        #     # name='mavros_node',
+        #     # namespace='rov1/mavros',
+        #     namespace=mavros_ns,
+        #     parameters=[mavros_params_file],            
+        #     remappings=[('/tf', '/rov2/tf'),
+        #           ('/tf_static', '/rov2/tf_static')] ,
+        #     # remappings=[('/tf', '/{}/tf'.format(LaunchConfiguration('namespace'))),
+        #     #       ('/tf_static', '/{}/tf_static'.format(LaunchConfiguration('namespace')))] ,
+        #     condition=IfCondition(LaunchConfiguration('mavros')),
+        # ),
 
         # Manage overall system (start, stop, etc.)
         Node(
@@ -160,7 +203,9 @@ def generate_launch_description():
             namespace = namespace,
             remappings=[
                 # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
-                ('camera_pose', 'orb_slam2_stereo_node/pose'),
+                ('camera_pose', 'orb_slam2_stereo_node/pose'), 
+                ('/tf', 'tf'),
+                ('/tf_static', 'tf_static')
             ],
             condition=IfCondition(LaunchConfiguration('base')),
         ),
@@ -176,6 +221,8 @@ def generate_launch_description():
             remappings=[
                 # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
                 ('camera_pose', 'orb_slam2_stereo_node/pose'),
+                ('/tf', 'tf'),
+                ('/tf_static', 'tf_static')
             ],
             condition=IfCondition(LaunchConfiguration('base')),
         ),
@@ -183,51 +230,96 @@ def generate_launch_description():
         # Replacement for base_controller: complete the tf tree
         # if base_controller runs, these three static_transfor_publisher will not run. 
         # these are for the case that base_controller does not run. 
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'map',
-                 '--child-frame-id', 'slam'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'map',
+        #          '--child-frame-id', 'slam'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'map',
-                 '--child-frame-id', 'odom'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'map',
+        #          '--child-frame-id', 'odom'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--frame-id', 'odom',
-                 '--child-frame-id', 'base_link'],
-            output='screen',
-            condition=UnlessCondition(LaunchConfiguration('base')),
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--frame-id', 'odom',
+        #          '--child-frame-id', 'base_link'],
+        #     output='screen',
+        #     condition=UnlessCondition(LaunchConfiguration('base')),
+        # ),
 
-        #on the other hand, these two static tf pub need to be running
+        # on the other hand, these two static tf pub need to be running
         # Replacement for an URDF file: base_link->left_camera_link is static
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--x', '-0.15',
-                 '--y', '0.18',
-                 '--z', '-0.0675',
-                 '--pitch', str(math.pi/2),
-                 '--frame-id', 'base_link',
-                 '--child-frame-id', 'left_camera_link'],
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--x', '-0.15',
+        #          '--y', '0.18',
+        #          '--z', '-0.0675',
+        #          '--pitch', str(math.pi/2),
+        #          '--frame-id', 'base_link',
+        #          '--child-frame-id', 'left_camera_link',
+        #          ],
+        #     output='screen',
+        # ),
+
+        ComposableNodeContainer(
+            name='tf_container',
+            package='rclcpp_components',
+            executable='component_container',  
+            namespace='',          
+            composable_node_descriptions=[
+                ComposableNode(
+                    package='tf2_ros',
+                    plugin='tf2_ros::StaticTransformBroadcasterNode',
+                    name='static_tf_base2cam',
+                    namespace=namespace,
+                    parameters=[{
+                        'frame_id':'base_link',
+                        'child_frame_id':'left_camera_link',
+                        'translation.x': -0.15,
+                        'translation.y': 0.18,
+                        'translation.z': -0.0675,
+                        'rotation.x': 0.0,
+                        'rotation.y': 0.0,
+                        'rotation.z': 0.0,
+                        'rotation.w': 1.0
+                        }],
+                    remappings=remappings),
+                ComposableNode(
+                    package='tf2_ros',
+                    plugin='tf2_ros::StaticTransformBroadcasterNode',
+                    name='static_tf_slam2down',
+                    namespace=namespace,
+                    parameters=[{
+                        'frame_id':'slam',
+                        'child_frame_id':'down',
+                        'translation.x': 0.0,
+                        'translation.y': 0.0,
+                        'translation.z': 0.0,
+                        'rotation.x': 0.0,
+                        'rotation.y': 0.7071067811865475,
+                        'rotation.z': 0.0,
+                        'rotation.w': 0.7071067811865476
+                        }],
+                    remappings=remappings)
+            ],
             output='screen',
         ),
 
         # Provide down frame to accommodate down-facing cameras
-        ExecuteProcess(
-            cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
-                 '--pitch', str(math.pi/2),
-                 '--frame-id', 'slam',
-                 '--child-frame-id', 'down'],
-            output='screen',
-        ),
+        # ExecuteProcess(
+        #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
+        #          '--pitch', str(math.pi/2),
+        #          '--frame-id', 'slam',
+        #          '--child-frame-id', 'down'],
+        #     output='screen',
+        # ),
 
         # orb_slam2: build a map of 3d points, localize against the map, and publish the camera pose
         Node(
@@ -243,6 +335,8 @@ def generate_launch_description():
                 ('/image_left/image_color_rect', 'stereo_left'),
                 ('/image_right/image_color_rect', 'stereo_right'),
                 ('/camera/camera_info', 'stereo_right/camera_info'),
+                ('/tf', 'tf'),
+                ('/tf_static', 'tf_static')
             ],
             condition=IfCondition(LaunchConfiguration('slam')),
         ),

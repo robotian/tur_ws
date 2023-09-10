@@ -67,8 +67,8 @@ def generate_launch_description():
 
     # MK: if you change these relative topics, then it will bring "odom" canTransform blah blah error.
     #  But it needs to be corrected for namespace compatibility
-    remappings = [('/tf', '/tf'),
-                  ('/tf_static', '/tf_static')] 
+    remappings = [('/tf', 'tf'),
+                  ('/tf_static', 'tf_static')] 
 
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
