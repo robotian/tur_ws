@@ -69,6 +69,7 @@ def generate_launch_description():
     #  But it needs to be corrected for namespace compatibility
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')] 
+    # remappings = LaunchConfiguration('remappings')
 
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
@@ -103,6 +104,11 @@ def generate_launch_description():
         'namespace',
         default_value='',
         description='Top-level namespace')
+    
+    declare_remapping_cmd = DeclareLaunchArgument(
+        'remappings',
+        default_value='',
+        description='remapping?')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
@@ -138,6 +144,7 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
             print_cmd,
+            # declare_remapping_cmd,
             Node(
                 package='nav2_controller',
                 executable='controller_server',

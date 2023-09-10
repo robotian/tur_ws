@@ -221,6 +221,7 @@ def generate_launch_description():
             remappings=[
                 # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
                 ('camera_pose', 'orb_slam2_stereo_node/pose'),
+                # remappings,
                 ('/tf', 'tf'),
                 ('/tf_static', 'tf_static')
             ],
@@ -286,9 +287,9 @@ def generate_launch_description():
                         'translation.y': 0.18,
                         'translation.z': -0.0675,
                         'rotation.x': 0.0,
-                        'rotation.y': 0.0,
+                        'rotation.y': 0.7071067811865475,
                         'rotation.z': 0.0,
-                        'rotation.w': 1.0
+                        'rotation.w': 0.7071067811865476
                         }],
                     remappings=remappings),
                 ComposableNode(
@@ -307,7 +308,8 @@ def generate_launch_description():
                         'rotation.z': 0.0,
                         'rotation.w': 0.7071067811865476
                         }],
-                    remappings=remappings)
+                    remappings=remappings
+                    )
             ],
             output='screen',
         ),
@@ -317,7 +319,11 @@ def generate_launch_description():
         #     cmd=['/opt/ros/humble/lib/tf2_ros/static_transform_publisher',
         #          '--pitch', str(math.pi/2),
         #          '--frame-id', 'slam',
-        #          '--child-frame-id', 'down'],
+        #          '--child-frame-id', 'down', 
+        #          '--ros-args',
+        #          '-r','/tf:=/rov2/tf',
+        #          '-r','/tf_static:=/rov2/tf_static',
+        #          '-r','__ns:=/rov2'],
         #     output='screen',
         # ),
 
@@ -352,6 +358,7 @@ def generate_launch_description():
                 'use_composition': 'False',
                 'use_respawn': 'False',
                 'container_name': 'nav2_container',
+                # 'remappings':remappings,
             }.items(),
             condition=IfCondition(LaunchConfiguration('nav')),
         ),
