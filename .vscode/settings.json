@@ -1,4 +1,5 @@
 {
+    "ros.distro": "humble",
     "editor.tabSize": 8,
     "editor.rulers": [
         100
