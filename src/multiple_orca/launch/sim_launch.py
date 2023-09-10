@@ -196,8 +196,9 @@ def generate_launch_description():
         # ),
 
         # Launch rviz
+        # (TODO MK) need to create rviz config for multiple robots in different namespaces
         ExecuteProcess(
-            cmd=['rviz2', '-d', rviz_file],
+            cmd=['rviz2', '-d', rviz_file,'--ros-args','-r','/tf:=/rov2/tf','-r','/tf_static:=/rov2/tf_static'],
             output='screen',
             condition=IfCondition(LaunchConfiguration('rviz')),
         ),
