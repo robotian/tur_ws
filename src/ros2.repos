@@ -29,3 +29,8 @@ repositories:
     type: git
     url: https://github.com/mavlink/mavros
     version: ros2
+
+  orca4:
+    type: git
+    url: git@github.com:robotian/orca4.git
+    version: main
