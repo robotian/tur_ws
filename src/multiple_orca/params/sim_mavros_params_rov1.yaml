@@ -33,6 +33,7 @@
   ros__parameters:
     fcu_url: "tcp://localhost:5760"
     gcs_url: "udp://@localhost:14550"
+    tgt_system: 1
 
 /**/mavros/local_position:
   ros__parameters:

@@ -1,6 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
   <world name="sand">
+    <!-- to prevent error message : ODE INTERNAL ERROR 1: assertion "d[i] != dReal(0.0)" failed in _dLDLTRemove() -->
+    <physics name="500us" type="ignored">
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1</real_time_factor>
+    </physics>
 
     <!-- Base Gazebo plugins -->
     <plugin

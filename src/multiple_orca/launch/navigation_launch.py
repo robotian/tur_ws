@@ -27,7 +27,7 @@ from launch.actions import DeclareLaunchArgument, GroupAction, SetEnvironmentVar
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import LoadComposableNodes
-from launch_ros.actions import Node
+from launch_ros.actions import Node, SetParameter
 from launch_ros.descriptions import ComposableNode
 from nav2_common.launch import RewrittenYaml
 
@@ -81,6 +81,9 @@ def generate_launch_description():
             root_key    = namespace,  # wrap all the parameters with namespace
             param_rewrites  = param_substitutions,
             convert_types   = True)   
+    
+    # set_use_sim_time_param = SetParameter(name='use_sim_time', value=True)
+    
     
     # configured_params = params_file
 
@@ -152,7 +155,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 respawn_delay=2.0,
                 namespace=namespace,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -163,7 +166,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 namespace=namespace,
                 respawn_delay=2.0,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -174,7 +177,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 namespace=namespace,
                 respawn_delay=2.0,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -185,7 +188,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 namespace=namespace,
                 respawn_delay=2.0,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -196,7 +199,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 namespace=namespace,
                 respawn_delay=2.0,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -207,7 +210,7 @@ def generate_launch_description():
                 respawn=use_respawn,
                 namespace=namespace,
                 respawn_delay=2.0,
-                parameters=[configured_params],
+                parameters=[configured_params,{'use_sim_time': use_sim_time}],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings),
             Node(
@@ -285,6 +288,7 @@ def generate_launch_description():
 
     # Set environment variables
     ld.add_action(stdout_linebuf_envvar)
+    # ld.add_action(set_use_sim_time_param)
 
     # Declare the launch options
     ld.add_action(declare_namespace_cmd)

@@ -1,0 +1,3486 @@
+<sdf version="1.6">
+	<model name="tur1" canonical_link="anchor">
+		<pose>0 0 0 0 0 0</pose>
+		<link name="base_link">
+			<inertial>
+				<pose>0 0 0.011 0 0 0</pose>
+				<mass>10</mass>
+				<inertia>
+					<ixx>0.09873097998042396</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.17756847998042397</iyy>
+					<iyz>0</iyz>
+					<izz>0.2692441666666667</izz>
+				</inertia>
+			</inertial>
+			<visual name="base_link_visual">
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/bluerov2.dae</uri>
+						<scale>0.025 0.025 0.025</scale>
+					</mesh>
+				</geometry>
+			</visual>
+			<collision name="base_link_collision">
+				<pose>0 0 0.06 0 0 0</pose>
+				<geometry>
+					<box>
+						<size>0.457 0.338 0.06506286173008947</size>
+					</box>
+				</geometry>
+			</collision>
+			<sensor name="imu_sensor" type="imu">
+				<pose>0 0 0 3.141592653589793 0 0</pose>
+				<always_on>1</always_on>
+				<update_rate>1000.0</update_rate>
+			</sensor>
+			<pose relative_to="cable_base_link">0 0 0 0 0 3.141592653589793</pose>
+		</link>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>base_link</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-33.800000000000004</xUabsU>
+			<yVabsV>-54.26875</yVabsV>
+			<zWabsW>-73.37135</zWabsW>
+			<kPabsP>-4.0</kPabsP>
+			<mQabsQ>-4.0</mQabsQ>
+			<nRabsR>-4.0</nRabsR>
+		</plugin>
+		<link name="thruster1">
+			<pose relative_to="base_link">0.14 -0.092 0 -1.5707963267948966 1.5707963267948966 -0.7853981633974483</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-cw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<link name="thruster2">
+			<pose relative_to="base_link">0.14 0.092 0 -1.5707963267948966 1.5707963267948966 -2.356194490192345</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 -1.5707963267948966 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-ccw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<link name="thruster3">
+			<pose relative_to="base_link">-0.14 -0.092 0 -1.5707963267948966 1.5707963267948966 0.7853981633974483</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 -1.5707963267948966 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-ccw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<link name="thruster4">
+			<pose relative_to="base_link">-0.14 0.092 0 -1.5707963267948966 1.5707963267948966 2.356194490192345</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-cw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<link name="thruster5">
+			<pose relative_to="base_link">0 -0.109 0.077 0 0 0</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 -1.5707963267948966 0 1.5707963267948966</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-ccw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<link name="thruster6">
+			<pose relative_to="base_link">0 0.109 0.077 0 0 0</pose>
+			<visual name="thruster_prop_visual">
+				<pose>0 0 0 1.5707963267948966 0 1.5707963267948966</pose>
+				<geometry>
+					<mesh>
+						<uri>model://tur1/meshes/t200-cw-prop.dae</uri>
+					</mesh>
+				</geometry>
+			</visual>
+			<inertial>
+				<mass>0.002</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<joint name="thruster1_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster1</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<joint name="thruster2_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster2</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<joint name="thruster3_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster3</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<joint name="thruster4_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster4</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<joint name="thruster5_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster5</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<joint name="thruster6_joint" type="revolute">
+			<parent>base_link</parent>
+			<child>thruster6</child>
+			<axis>
+				<xyz>0 0 -1</xyz>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster1_joint</joint_name>
+			<thrust_coefficient>0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster2_joint</joint_name>
+			<thrust_coefficient>0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster3_joint</joint_name>
+			<thrust_coefficient>-0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster4_joint</joint_name>
+			<thrust_coefficient>-0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster5_joint</joint_name>
+			<thrust_coefficient>0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+			<namespace>tur1</namespace>
+			<joint_name>thruster6_joint</joint_name>
+			<thrust_coefficient>-0.02</thrust_coefficient>
+			<fluid_density>1000</fluid_density>
+			<propeller_diameter>0.1</propeller_diameter>
+			<velocity_control>true</velocity_control>
+			<use_angvel_cmd>False</use_angvel_cmd>
+		</plugin>
+		<plugin name="ArduPilotPlugin" filename="libArduPilotPlugin.so">
+			<fdm_addr>127.0.0.1</fdm_addr>
+			<fdm_port_in>9002</fdm_port_in>
+			<connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+			<lock_step>1</lock_step>
+			<modelXYZToAirplaneXForwardZDown>0 0 0 3.141592653589793 0 0</modelXYZToAirplaneXForwardZDown>
+			<gazeboXYZToNED>0 0 0 3.141592653589793 0 1.5707963267948966</gazeboXYZToNED>
+			<imuName>imu_sensor</imuName>
+			<control channel="0">
+				<jointName>thruster1_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster1_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+			<control channel="1">
+				<jointName>thruster2_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster2_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+			<control channel="2">
+				<jointName>thruster3_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster3_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+			<control channel="3">
+				<jointName>thruster4_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster4_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+			<control channel="4">
+				<jointName>thruster5_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster5_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+			<control channel="5">
+				<jointName>thruster6_joint</jointName>
+				<servo_min>1100</servo_min>
+				<servo_max>1900</servo_max>
+				<type>COMMAND</type>
+				<cmd_topic>/model/tur1/joint/thruster6_joint/cmd_thrust</cmd_topic>
+				<offset>-0.5</offset>
+				<multiplier>100</multiplier>
+			</control>
+		</plugin>
+		<link name="left_camera_link">
+			<pose relative_to="base_link">-0.18 0.18 -0.06749999999999999 0 0 0</pose>
+			<visual name="left_camera_tube">
+				<transparency>0.5</transparency>
+				<geometry>
+					<cylinder>
+						<length>0.135</length>
+						<radius>0.0275</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<sensor name="left_camera" type="camera">
+				<pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
+				<camera>
+					<horizontal_fov>1.4</horizontal_fov>
+					<image>
+						<width>800</width>
+						<height>600</height>
+					</image>
+					<clip>
+						<near>0.2</near>
+						<far>4</far>
+					</clip>
+				</camera>
+				<always_on>1</always_on>
+				<update_rate>5</update_rate>
+				<visualize>true</visualize>
+				<topic>tur1/stereo_left</topic>
+			</sensor>
+			<inertial>
+				<mass>0.001</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<joint name="left_camera_joint" type="fixed">
+			<parent>base_link</parent>
+			<child>left_camera_link</child>
+		</joint>
+		<link name="right_camera_link">
+			<pose relative_to="base_link">-0.18 -0.18 -0.06749999999999999 0 0 0</pose>
+			<visual name="right_camera_tube">
+				<transparency>0.5</transparency>
+				<geometry>
+					<cylinder>
+						<length>0.135</length>
+						<radius>0.0275</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<sensor name="right_camera" type="camera">
+				<pose>0 0 -0.08750000000000001 0 1.5707963267948966 0</pose>
+				<camera>
+					<horizontal_fov>1.4</horizontal_fov>
+					<image>
+						<width>800</width>
+						<height>600</height>
+					</image>
+					<clip>
+						<near>0.2</near>
+						<far>4</far>
+					</clip>
+				</camera>
+				<always_on>1</always_on>
+				<update_rate>5</update_rate>
+				<visualize>true</visualize>
+				<topic>tur1/stereo_right</topic>
+			</sensor>
+			<inertial>
+				<mass>0.001</mass>
+				<inertia>
+					<ixx>0.001</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>0.001</iyy>
+					<iyz>0</iyz>
+					<izz>0.001</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<joint name="right_camera_joint" type="fixed">
+			<parent>base_link</parent>
+			<child>right_camera_link</child>
+		</joint>
+		<plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+			<odom_frame>world</odom_frame>
+			<robot_base_frame>tur1</robot_base_frame>
+			<dimensions>3</dimensions>
+		</plugin>
+		<plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+		</plugin>
+		<plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+			<publish_link_pose>true</publish_link_pose>
+			<use_pose_vector_msg>true</use_pose_vector_msg>
+			<static_publisher>true</static_publisher>
+			<static_update_frequency>1</static_update_frequency>
+		</plugin>
+		<link name="anchor">
+			<pose>0 0 0 0 -1.5707963267948966 0</pose>
+			<visual name="anchor_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.05</length>
+						<radius>0.3</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="world_fixed_jnt" type="fixed">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>world</parent>
+			<child>anchor</child>
+		</joint>
+		<link name="seg20_pitch">
+			<pose relative_to="anchor">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg20_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg20_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>anchor</parent>
+			<child>seg20_pitch</child>
+			<axis>
+				<xyz expressed_in="anchor">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg20_yaw">
+			<pose relative_to="seg20_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg20_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg20_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg20_pitch</parent>
+			<child>seg20_yaw</child>
+			<axis>
+				<xyz expressed_in="seg20_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg20_body">
+			<pose relative_to="seg20_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg20_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg20_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg20_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg20_yaw</parent>
+			<child>seg20_body</child>
+			<axis>
+				<xyz expressed_in="seg20_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg20_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg20_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg19_pitch">
+			<pose relative_to="seg20_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg19_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg19_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg20_body</parent>
+			<child>seg19_pitch</child>
+			<axis>
+				<xyz expressed_in="seg20_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg19_yaw">
+			<pose relative_to="seg19_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg19_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg19_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg19_pitch</parent>
+			<child>seg19_yaw</child>
+			<axis>
+				<xyz expressed_in="seg19_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg19_body">
+			<pose relative_to="seg19_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg19_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg19_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg19_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg19_yaw</parent>
+			<child>seg19_body</child>
+			<axis>
+				<xyz expressed_in="seg19_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg19_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg19_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg18_pitch">
+			<pose relative_to="seg19_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg18_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg18_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg19_body</parent>
+			<child>seg18_pitch</child>
+			<axis>
+				<xyz expressed_in="seg19_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg18_yaw">
+			<pose relative_to="seg18_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg18_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg18_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg18_pitch</parent>
+			<child>seg18_yaw</child>
+			<axis>
+				<xyz expressed_in="seg18_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg18_body">
+			<pose relative_to="seg18_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg18_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg18_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg18_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg18_yaw</parent>
+			<child>seg18_body</child>
+			<axis>
+				<xyz expressed_in="seg18_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg18_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg18_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg17_pitch">
+			<pose relative_to="seg18_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg17_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg17_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg18_body</parent>
+			<child>seg17_pitch</child>
+			<axis>
+				<xyz expressed_in="seg18_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg17_yaw">
+			<pose relative_to="seg17_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg17_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg17_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg17_pitch</parent>
+			<child>seg17_yaw</child>
+			<axis>
+				<xyz expressed_in="seg17_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg17_body">
+			<pose relative_to="seg17_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg17_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg17_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg17_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg17_yaw</parent>
+			<child>seg17_body</child>
+			<axis>
+				<xyz expressed_in="seg17_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg17_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg17_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg16_pitch">
+			<pose relative_to="seg17_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg16_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg16_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg17_body</parent>
+			<child>seg16_pitch</child>
+			<axis>
+				<xyz expressed_in="seg17_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg16_yaw">
+			<pose relative_to="seg16_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg16_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg16_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg16_pitch</parent>
+			<child>seg16_yaw</child>
+			<axis>
+				<xyz expressed_in="seg16_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg16_body">
+			<pose relative_to="seg16_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg16_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg16_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg16_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg16_yaw</parent>
+			<child>seg16_body</child>
+			<axis>
+				<xyz expressed_in="seg16_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg16_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg16_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg15_pitch">
+			<pose relative_to="seg16_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg15_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg15_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg16_body</parent>
+			<child>seg15_pitch</child>
+			<axis>
+				<xyz expressed_in="seg16_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg15_yaw">
+			<pose relative_to="seg15_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg15_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg15_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg15_pitch</parent>
+			<child>seg15_yaw</child>
+			<axis>
+				<xyz expressed_in="seg15_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg15_body">
+			<pose relative_to="seg15_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg15_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg15_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg15_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg15_yaw</parent>
+			<child>seg15_body</child>
+			<axis>
+				<xyz expressed_in="seg15_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg15_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg15_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg14_pitch">
+			<pose relative_to="seg15_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg14_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg14_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg15_body</parent>
+			<child>seg14_pitch</child>
+			<axis>
+				<xyz expressed_in="seg15_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg14_yaw">
+			<pose relative_to="seg14_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg14_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg14_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg14_pitch</parent>
+			<child>seg14_yaw</child>
+			<axis>
+				<xyz expressed_in="seg14_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg14_body">
+			<pose relative_to="seg14_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg14_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg14_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg14_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg14_yaw</parent>
+			<child>seg14_body</child>
+			<axis>
+				<xyz expressed_in="seg14_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg14_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg14_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg13_pitch">
+			<pose relative_to="seg14_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg13_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg13_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg14_body</parent>
+			<child>seg13_pitch</child>
+			<axis>
+				<xyz expressed_in="seg14_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg13_yaw">
+			<pose relative_to="seg13_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg13_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg13_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg13_pitch</parent>
+			<child>seg13_yaw</child>
+			<axis>
+				<xyz expressed_in="seg13_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg13_body">
+			<pose relative_to="seg13_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg13_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg13_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg13_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg13_yaw</parent>
+			<child>seg13_body</child>
+			<axis>
+				<xyz expressed_in="seg13_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg13_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg13_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg12_pitch">
+			<pose relative_to="seg13_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg12_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg12_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg13_body</parent>
+			<child>seg12_pitch</child>
+			<axis>
+				<xyz expressed_in="seg13_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg12_yaw">
+			<pose relative_to="seg12_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg12_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg12_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg12_pitch</parent>
+			<child>seg12_yaw</child>
+			<axis>
+				<xyz expressed_in="seg12_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg12_body">
+			<pose relative_to="seg12_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg12_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg12_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg12_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg12_yaw</parent>
+			<child>seg12_body</child>
+			<axis>
+				<xyz expressed_in="seg12_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg12_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg12_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg11_pitch">
+			<pose relative_to="seg12_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg11_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg11_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg12_body</parent>
+			<child>seg11_pitch</child>
+			<axis>
+				<xyz expressed_in="seg12_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg11_yaw">
+			<pose relative_to="seg11_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg11_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg11_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg11_pitch</parent>
+			<child>seg11_yaw</child>
+			<axis>
+				<xyz expressed_in="seg11_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg11_body">
+			<pose relative_to="seg11_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg11_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg11_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg11_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg11_yaw</parent>
+			<child>seg11_body</child>
+			<axis>
+				<xyz expressed_in="seg11_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg11_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg11_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg10_pitch">
+			<pose relative_to="seg11_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg10_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg10_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg11_body</parent>
+			<child>seg10_pitch</child>
+			<axis>
+				<xyz expressed_in="seg11_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg10_yaw">
+			<pose relative_to="seg10_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg10_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg10_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg10_pitch</parent>
+			<child>seg10_yaw</child>
+			<axis>
+				<xyz expressed_in="seg10_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg10_body">
+			<pose relative_to="seg10_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg10_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg10_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg10_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg10_yaw</parent>
+			<child>seg10_body</child>
+			<axis>
+				<xyz expressed_in="seg10_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg10_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg10_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg9_pitch">
+			<pose relative_to="seg10_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg9_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg9_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg10_body</parent>
+			<child>seg9_pitch</child>
+			<axis>
+				<xyz expressed_in="seg10_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg9_yaw">
+			<pose relative_to="seg9_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg9_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg9_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg9_pitch</parent>
+			<child>seg9_yaw</child>
+			<axis>
+				<xyz expressed_in="seg9_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg9_body">
+			<pose relative_to="seg9_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg9_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg9_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg9_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg9_yaw</parent>
+			<child>seg9_body</child>
+			<axis>
+				<xyz expressed_in="seg9_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg9_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg9_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg8_pitch">
+			<pose relative_to="seg9_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg8_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg8_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg9_body</parent>
+			<child>seg8_pitch</child>
+			<axis>
+				<xyz expressed_in="seg9_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg8_yaw">
+			<pose relative_to="seg8_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg8_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg8_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg8_pitch</parent>
+			<child>seg8_yaw</child>
+			<axis>
+				<xyz expressed_in="seg8_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg8_body">
+			<pose relative_to="seg8_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg8_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg8_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg8_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg8_yaw</parent>
+			<child>seg8_body</child>
+			<axis>
+				<xyz expressed_in="seg8_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg8_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg8_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg7_pitch">
+			<pose relative_to="seg8_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg7_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg7_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg8_body</parent>
+			<child>seg7_pitch</child>
+			<axis>
+				<xyz expressed_in="seg8_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg7_yaw">
+			<pose relative_to="seg7_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg7_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg7_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg7_pitch</parent>
+			<child>seg7_yaw</child>
+			<axis>
+				<xyz expressed_in="seg7_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg7_body">
+			<pose relative_to="seg7_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg7_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg7_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg7_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg7_yaw</parent>
+			<child>seg7_body</child>
+			<axis>
+				<xyz expressed_in="seg7_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg7_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg7_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg6_pitch">
+			<pose relative_to="seg7_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg6_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg6_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg7_body</parent>
+			<child>seg6_pitch</child>
+			<axis>
+				<xyz expressed_in="seg7_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg6_yaw">
+			<pose relative_to="seg6_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg6_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg6_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg6_pitch</parent>
+			<child>seg6_yaw</child>
+			<axis>
+				<xyz expressed_in="seg6_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg6_body">
+			<pose relative_to="seg6_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg6_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg6_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg6_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg6_yaw</parent>
+			<child>seg6_body</child>
+			<axis>
+				<xyz expressed_in="seg6_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg6_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg6_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg5_pitch">
+			<pose relative_to="seg6_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg5_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg5_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg6_body</parent>
+			<child>seg5_pitch</child>
+			<axis>
+				<xyz expressed_in="seg6_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg5_yaw">
+			<pose relative_to="seg5_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg5_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg5_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg5_pitch</parent>
+			<child>seg5_yaw</child>
+			<axis>
+				<xyz expressed_in="seg5_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg5_body">
+			<pose relative_to="seg5_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg5_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg5_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg5_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg5_yaw</parent>
+			<child>seg5_body</child>
+			<axis>
+				<xyz expressed_in="seg5_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg5_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg5_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg4_pitch">
+			<pose relative_to="seg5_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg4_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg4_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg5_body</parent>
+			<child>seg4_pitch</child>
+			<axis>
+				<xyz expressed_in="seg5_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg4_yaw">
+			<pose relative_to="seg4_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg4_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg4_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg4_pitch</parent>
+			<child>seg4_yaw</child>
+			<axis>
+				<xyz expressed_in="seg4_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg4_body">
+			<pose relative_to="seg4_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg4_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg4_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg4_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg4_yaw</parent>
+			<child>seg4_body</child>
+			<axis>
+				<xyz expressed_in="seg4_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg4_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg4_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg3_pitch">
+			<pose relative_to="seg4_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg3_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg3_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg4_body</parent>
+			<child>seg3_pitch</child>
+			<axis>
+				<xyz expressed_in="seg4_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg3_yaw">
+			<pose relative_to="seg3_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg3_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg3_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg3_pitch</parent>
+			<child>seg3_yaw</child>
+			<axis>
+				<xyz expressed_in="seg3_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg3_body">
+			<pose relative_to="seg3_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg3_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg3_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg3_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg3_yaw</parent>
+			<child>seg3_body</child>
+			<axis>
+				<xyz expressed_in="seg3_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg3_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg3_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg2_pitch">
+			<pose relative_to="seg3_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg2_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg2_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg3_body</parent>
+			<child>seg2_pitch</child>
+			<axis>
+				<xyz expressed_in="seg3_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg2_yaw">
+			<pose relative_to="seg2_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg2_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg2_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg2_pitch</parent>
+			<child>seg2_yaw</child>
+			<axis>
+				<xyz expressed_in="seg2_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg2_body">
+			<pose relative_to="seg2_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg2_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg2_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg2_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg2_yaw</parent>
+			<child>seg2_body</child>
+			<axis>
+				<xyz expressed_in="seg2_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg2_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg2_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg1_pitch">
+			<pose relative_to="seg2_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg1_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg1_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg2_body</parent>
+			<child>seg1_pitch</child>
+			<axis>
+				<xyz expressed_in="seg2_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg1_yaw">
+			<pose relative_to="seg1_pitch">0 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg1_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg1_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg1_pitch</parent>
+			<child>seg1_yaw</child>
+			<axis>
+				<xyz expressed_in="seg1_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg1_body">
+			<pose relative_to="seg1_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg1_body_vis">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+			<collision name="seg1_body_col">
+				<pose>0 0 0 0 1.5707963267948966 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.4</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</collision>
+		</link>
+		<joint name="seg1_body_jnt" type="revolute">
+			<pose>0.2 0 0 0 0 0</pose>
+			<parent>seg1_yaw</parent>
+			<child>seg1_body</child>
+			<axis>
+				<xyz expressed_in="seg1_yaw">1 0 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<plugin filename="gz-sim-buoyancy-engine-system" name="gz::sim::systems::BuoyancyEngine">
+			<link_name>seg1_body</link_name>
+			<namespace>cable</namespace>
+			<min_volume>0.0000</min_volume>
+			<neutral_volume>0.00000001</neutral_volume>
+			<default_volume>0.00000002</default_volume>
+			<max_volume>0.00000003</max_volume>
+			<max_inflation_rate>0.000000001</max_inflation_rate>
+			<surface>0.0</surface>
+		</plugin>
+		<plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+			<link_name>seg1_body</link_name>
+			<water_density>1000</water_density>
+			<xDotU>0</xDotU>
+			<yDotV>0</yDotV>
+			<zDotW>0</zDotW>
+			<kDotP>0</kDotP>
+			<mDotQ>0</mDotQ>
+			<nDotR>0</nDotR>
+			<xU>0</xU>
+			<yV>0</yV>
+			<zW>0</zW>
+			<kP>0</kP>
+			<mQ>0</mQ>
+			<nR>0</nR>
+			<xUabsU>-0.0000005</xUabsU>
+			<yVabsV>-0.0000005</yVabsV>
+			<zWabsW>-0.0000005</zWabsW>
+			<kPabsP>-0.0000001</kPabsP>
+			<mQabsQ>-0.0000001</mQabsQ>
+			<nRabsR>-0.0000001</nRabsR>
+		</plugin>
+		<link name="seg0_pitch">
+			<pose relative_to="seg1_body">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg0_pitch_vis">
+				<pose>0 0 0 1.5707963267948966  0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg0_pitch_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg1_body</parent>
+			<child>seg0_pitch</child>
+			<axis>
+				<xyz expressed_in="seg1_body">0 1 0</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="seg0_yaw">
+			<pose relative_to="seg0_pitch">0 0 0 0 1.5707963267948966 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+			<visual name="seg0_yaw_vis">
+				<pose>0 0 0 0 0 0</pose>
+				<geometry>
+					<cylinder>
+						<length>0.02</length>
+						<radius>0.01</radius>
+					</cylinder>
+				</geometry>
+			</visual>
+		</link>
+		<joint name="seg0_yaw_jnt" type="revolute">
+			<pose>0 0 0 0 0 0</pose>
+			<parent>seg0_pitch</parent>
+			<child>seg0_yaw</child>
+			<axis>
+				<xyz expressed_in="seg0_pitch">0 0 1</xyz>
+				<limit>
+					<lower>-1.5707963267948966</lower>
+					<upper>1.5707963267948966</upper>
+				</limit>
+			</axis>
+		</joint>
+		<link name="cable_base_link">
+			<pose relative_to="seg0_yaw">-0.2 0 0 0 0 0</pose>
+			<inertial>
+				<mass>1e-10</mass>
+				<inertia>
+					<ixx>1e-10</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-10</iyy>
+					<iyz>0</iyz>
+					<izz>1e-10</izz>
+				</inertia>
+			</inertial>
+		</link>
+		<joint name="cable_jnt" type="fixed">
+			<parent>seg0_yaw</parent>
+			<child>cable_base_link</child>
+		</joint>
+		<joint name="cable_base_jnt" type="fixed">
+			<parent>cable_base_link</parent>
+			<child>base_link</child>
+		</joint>
+	</model>
+</sdf>

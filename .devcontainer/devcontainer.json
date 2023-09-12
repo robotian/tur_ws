@@ -31,7 +31,7 @@
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
-			"extensions": [
+			"extensions": [				
 				"althack.ament-task-provider",
 				"betwo.b2-catkin-tools",
 				"DotJoshJohnson.xml",

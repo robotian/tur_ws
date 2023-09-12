@@ -36,7 +36,7 @@ from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchD
 from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
+from launch_ros.actions import Node, SetParameter
 
 
 def generate_launch_description():
@@ -57,7 +57,7 @@ def generate_launch_description():
     sim_right_ini = os.path.join(multiorca_dir, 'cfg', 'sim_right.ini')
 
     # check if you have all the parameter files and models before changing the namespace
-    rov_ns = 'rov2'  
+    rov_ns = 'rov1'  
 
     remappings = [('/tf', 'tf'),
                   ('/tf_static', 'tf_static')] 
@@ -66,6 +66,7 @@ def generate_launch_description():
     spawn_world_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'start_gz_sim.launch.py'))                       
         )
+    set_use_sim_time_param = SetParameter(name='use_sim_time', value=True)
     # spawn rov sdf model
     sdf_filepath = os.path.join(multiorca_dir, 'models', rov_ns, 'model.sdf')   
     opt_str = ['sdf_filename:"{name}"'.format(name=sdf_filepath),
@@ -116,6 +117,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         print_cmd,
+        set_use_sim_time_param,
         DeclareLaunchArgument(
             'namespace',
             default_value=rov_ns,
@@ -198,7 +200,7 @@ def generate_launch_description():
         # Launch rviz
         # (TODO MK) need to create rviz config for multiple robots in different namespaces
         ExecuteProcess(
-            cmd=['rviz2', '-d', rviz_file,'--ros-args','-r','/tf:=/rov2/tf','-r','/tf_static:=/rov2/tf_static'],
+            cmd=['rviz2', '-d', rviz_file,'--ros-args','-r','/tf:=/rov1/tf','-r','/tf_static:=/rov1/tf_static'],
             output='screen',
             condition=IfCondition(LaunchConfiguration('rviz')),
         ),
@@ -207,7 +209,7 @@ def generate_launch_description():
         # ardusub must be on the $PATH, see src/orca4/setup.bash
         ExecuteProcess(
             cmd=['ardusub', '-S', '-w', '-M', 'JSON', '--defaults', ardusub_params_file,
-                 '-I1', '--home', '33.810313,-118.39386700000001,0.0,270.0'],
+                 '-I0', '--home', '33.810313,-118.39386700000001,0.0,270.0'],
             output='screen',
             condition=IfCondition(LaunchConfiguration('ardusub')),
         ),

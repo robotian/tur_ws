@@ -1,0 +1,37 @@
+---
+- ros_topic_name: "tur1/odometry"
+  gz_topic_name: "/model/tur1/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+# - ros_topic_name: "rov1/camera_info"
+#   gz_topic_name: "/rov1/camera_info"
+#   ros_type_name: "sensor_msgs/msg/CameraInfo"
+#   gz_type_name: "gz.msgs.CameraInfo"
+#   direction: GZ_TO_ROS
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+- ros_topic_name: "tur1/tf"
+  gz_topic_name: "/model/tur1/pose"
+  ros_type_name: "tf2_msgs/msg/TFMessage"
+  gz_type_name: "gz.msgs.Pose_V"
+  # ros_type_name: "geometry_msgs/msg/Pose"
+  # gz_type_name: "gz.msgs.Pose"  
+  direction: GZ_TO_ROS
+- ros_topic_name: "tur1/tf_static"
+  gz_topic_name: "/model/tur1/pose_static"
+  # In case of <use_pose_vector_msg>true</use_pose_vector_msg>
+  ros_type_name: "tf2_msgs/msg/TFMessage"   
+  gz_type_name: "gz.msgs.Pose_V"   
+  # In case of <use_pose_vector_msg>false</use_pose_vector_msg>
+  # ros_type_name: "geometry_msgs/msg/Pose"
+  # gz_type_name: "gz.msgs.Pose"     
+  direction: GZ_TO_ROS
+# - ros_topic_name: "tur1/joint_states"
+#   gz_topic_name: "/world/sand/model/tur1/joint_state"
+#   ros_type_name: "sensor_msgs/msg/JointState"
+#   gz_type_name: "gz.msgs.Model"
+#   direction: GZ_TO_ROS

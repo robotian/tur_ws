@@ -44,11 +44,14 @@ from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 from launch.substitutions import TextSubstitution
 from launch.launch_context import LaunchContext
+
+from launch_ros.actions import SetParameter
 # import yaml
 
 def launch_setup(context, *args, **kwargs):
     arg_namespace = context.perform_substitution(LaunchConfiguration('namespace'))
     mavros_params_file = LaunchConfiguration('mavros_params_file')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     start_mav_node = Node(
                 package='mavros',
                 executable='mavros_node',
@@ -57,7 +60,7 @@ def launch_setup(context, *args, **kwargs):
                 # name='mavros_node',
                 # namespace='rov1/mavros',
                 namespace=f"{arg_namespace}/mavros",
-                parameters=[mavros_params_file],            
+                parameters=[mavros_params_file, {'use_sim_time': use_sim_time}],            
                 remappings=[('/tf', f"/{arg_namespace}/tf"),
                     ('/tf_static', f"/{arg_namespace}/tf_static")] ,
                 condition=IfCondition(LaunchConfiguration('mavros')),
@@ -117,14 +120,14 @@ def generate_launch_description():
 
     # input("Press Enter to continue...")
     # for debugging end
-
+    # set_use_sim_time_param = SetParameter(name='use_sim_time', value=True)
     namespace = LaunchConfiguration('namespace')
-    mavros_ns = LaunchConfiguration('mavros_ns')
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    # mavros_ns = LaunchConfiguration('mavros_ns')
     
 
     return LaunchDescription([
         print_cmd,
-        # wtf,
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
         DeclareLaunchArgument(
             'namespace',
@@ -143,6 +146,11 @@ def generate_launch_description():
             default_value='True',
             description='Launch mavros?',
         ),
+        
+        DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='false',
+        description='Use simulation (Gazebo) clock if true'),
 
         DeclareLaunchArgument(
             'mavros_params_file',
@@ -193,40 +201,7 @@ def generate_launch_description():
         #     condition=IfCondition(LaunchConfiguration('mavros')),
         # ),
 
-        # Manage overall system (start, stop, etc.)
-        Node(
-            package='orca_base',
-            executable='manager',
-            output='screen',
-            name='manager',
-            parameters=[orca_params_file],
-            namespace = namespace,
-            remappings=[
-                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
-                ('camera_pose', 'orb_slam2_stereo_node/pose'), 
-                ('/tf', 'tf'),
-                ('/tf_static', 'tf_static')
-            ],
-            condition=IfCondition(LaunchConfiguration('base')),
-        ),
-
-        # Base controller and localizer; manage external nav input, publish tf2 transforms, etc.
-        Node(
-            package='orca_base',
-            executable='base_controller',
-            output='screen',
-            name='base_controller',
-            parameters=[orca_params_file],
-            namespace = namespace,
-            remappings=[
-                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
-                ('camera_pose', 'orb_slam2_stereo_node/pose'),
-                # remappings,
-                ('/tf', 'tf'),
-                ('/tf_static', 'tf_static')
-            ],
-            condition=IfCondition(LaunchConfiguration('base')),
-        ),
+        
 
         # Replacement for base_controller: complete the tf tree
         # if base_controller runs, these three static_transfor_publisher will not run. 
@@ -289,7 +264,8 @@ def generate_launch_description():
                         'rotation.x': 0.0,
                         'rotation.y': 0.7071067811865475,
                         'rotation.z': 0.0,
-                        'rotation.w': 0.7071067811865476
+                        'rotation.w': 0.7071067811865476,
+                        'use_sim_time': use_sim_time
                         }],
                     remappings=remappings),
                 ComposableNode(
@@ -306,7 +282,8 @@ def generate_launch_description():
                         'rotation.x': 0.0,
                         'rotation.y': 0.7071067811865475,
                         'rotation.z': 0.0,
-                        'rotation.w': 0.7071067811865476
+                        'rotation.w': 0.7071067811865476,
+                        'use_sim_time': use_sim_time
                         }],
                     remappings=remappings
                     )
@@ -327,6 +304,8 @@ def generate_launch_description():
         #     output='screen',
         # ),
 
+
+
         # orb_slam2: build a map of 3d points, localize against the map, and publish the camera pose
         Node(
             package='orb_slam2_ros',
@@ -336,6 +315,7 @@ def generate_launch_description():
             namespace = namespace,
             parameters=[orca_params_file, {
                 'voc_file': orb_voc_file,
+                'use_sim_time': use_sim_time,
             }],
             remappings=[
                 ('/image_left/image_color_rect', 'stereo_left'),
@@ -346,13 +326,49 @@ def generate_launch_description():
             ],
             condition=IfCondition(LaunchConfiguration('slam')),
         ),
+        # Manage overall system (start, stop, etc.)
+        Node(
+            package='orca_base',
+            executable='manager',
+            output='screen',
+            name='manager',
+            parameters=[orca_params_file, 
+                        {'use_sim_time': use_sim_time}],
+            namespace = namespace,
+            remappings=[
+                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
+                ('camera_pose', 'orb_slam2_stereo_node/pose'), 
+                ('/tf', 'tf'),
+                ('/tf_static', 'tf_static')
+            ],
+            condition=IfCondition(LaunchConfiguration('base')),
+        ),
+
+        # Base controller and localizer; manage external nav input, publish tf2 transforms, etc.
+        Node(
+            package='orca_base',
+            executable='base_controller',
+            output='screen',
+            name='base_controller',
+            parameters=[orca_params_file,
+                        {'use_sim_time': use_sim_time}],
+            namespace = namespace,
+            remappings=[
+                # Topic is hard coded in orb_slam2_ros to /orb_slam2_stereo_node/pose
+                ('camera_pose', 'orb_slam2_stereo_node/pose'),
+                # remappings,
+                ('/tf', 'tf'),
+                ('/tf_static', 'tf_static')
+            ],
+            condition=IfCondition(LaunchConfiguration('base')),
+        ),
 
         # Include the rest of Nav2
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(multiorca_dir, 'launch', 'navigation_launch.py')),
             launch_arguments={
                 'namespace': namespace,
-                'use_sim_time': 'False',
+                'use_sim_time': use_sim_time,
                 'autostart': 'False',
                 'params_file': configured_nav2_params,
                 'use_composition': 'False',
