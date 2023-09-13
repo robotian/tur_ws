@@ -56,7 +56,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_gz_sim, "launch", "gz_sim.launch.py")
         ),
         launch_arguments={
-            "gz_args": "-v3 -r "   # -v: option is for verbose level
+            "gz_args": "-v3 -r -s "   # -v: option is for verbose level
             + os.path.join(multiorca_dir, 'worlds', 'sand_empty.world'),
             "use_sim_time":use_sim_time
         }.items(),
