@@ -4,8 +4,12 @@
     <!-- to prevent error message : ODE INTERNAL ERROR 1: assertion "d[i] != dReal(0.0)" failed in _dLDLTRemove() -->
     <physics name="500us" type="ignored">
       <max_step_size>0.0005</max_step_size>
-      <real_time_factor>1</real_time_factor>
+      <real_time_factor>0</real_time_factor>
     </physics>
+    <!-- <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>0</real_time_factor>
+    </physics> -->
 
     <!-- Base Gazebo plugins -->
     <plugin

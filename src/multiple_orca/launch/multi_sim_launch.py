@@ -59,7 +59,7 @@ def generate_launch_description():
     # models/{rov-name}
     # params/sim_mavros_params_{rov-name}
     robots = [
-        {'name': 'rov1', 'x_pose': 0.0, 'y_pose': 0.0, 'z_pose': 0.0,
+        {'name': 'tur1', 'x_pose': 0.0, 'y_pose': 0.0, 'z_pose': 0.0,
                            'x': 0.0, 'y': 0.0, 'z': 0.0, 'w': 1.0, 'instance':'-I0',
                            'home':'33.810313,-118.39386700000001,0.0,270.0',
                            'sysid':'1',
