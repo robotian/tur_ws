@@ -1,0 +1,24 @@
+[submodule "src/bluerov2_ignition"]
+	path = src/bluerov2_ignition
+	url = https://github.com/clydemcqueen/bluerov2_ignition
+	branch = main
+[submodule "src/orb_slam_2_ros"]
+	path = src/orb_slam_2_ros
+	url = https://github.com/clydemcqueen/orb_slam_2_ros
+	branch = orca4_humble
+[submodule "src/ros2_shared"]
+	path = src/ros2_shared
+	url = https://github.com/ptrmu/ros2_shared
+	branch = master
+[submodule "src/ros_gz"]
+	path = src/ros_gz
+	url = https://github.com/gazebosim/ros_gz
+	branch = humble
+[submodule "src/mavros"]
+	path = src/mavros
+	url = https://github.com/mavlink/mavros
+	branch = ros2
+[submodule "src/orca4"]
+	path = src/orca4
+	url = git@github.com:robotian/orca4.git
+	branch = main
