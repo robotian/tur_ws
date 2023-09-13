@@ -72,5 +72,5 @@
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
     ],
-    "cmake.sourceDirectory": "/home/robotian/workspace/tur_ws/build/mavros_msgs/mavros_msgs__py"
+    "cmake.sourceDirectory": "/workspaces/tur_ws/build/mavros_msgs/mavros_msgs__py"
 }
