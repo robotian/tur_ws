@@ -22,3 +22,7 @@
 	path = src/orca4
 	url = git@github.com:robotian/orca4.git
 	branch = main
+[submodule "src/multiple_orca"]
+	path = src/multiple_orca
+	url = git@github.com:robotian/multiple_orca.git
+	branch = main
