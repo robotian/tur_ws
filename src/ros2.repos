@@ -34,3 +34,8 @@ repositories:
     type: git
     url: git@github.com:robotian/orca4.git
     version: main
+
+  multiple_orca:
+    type: git
+    url: git@github.com:robotian/multiple_orca.git
+    version: main
