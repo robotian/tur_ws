@@ -5,9 +5,11 @@
         100
     ],
     "files.associations": {
+        "*.sdf": "xml",
         "*.repos": "yaml",
         "*.world": "xml",
-        "*.xacro": "xml"
+        "*.xacro": "xml",
+        "chrono": "cpp"
     },
     "python.analysis.extraPaths": [
         "/opt/ros/humble/lib/python3.10/site-packages/"
