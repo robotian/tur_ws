@@ -32,12 +32,12 @@ repositories:
 
   orca4:
     type: git
-    url: git@github.com:robotian/orca4.git
+    url: https://github.com/robotian/orca4.git
     version: main
 
   multiple_orca:
     type: git
-    url: git@github.com:robotian/multiple_orca.git
+    url: https://github.com/robotian/multiple_orca.git
     version: main
 
   geometry2:
