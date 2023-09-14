@@ -39,3 +39,8 @@ repositories:
     type: git
     url: git@github.com:robotian/multiple_orca.git
     version: main
+
+  geometry2:
+    type: git 
+    url: https://github.com/ros2/geometry2.git
+    version: humble
