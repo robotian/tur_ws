@@ -33,7 +33,7 @@ repositories:
   orca4:
     type: git
     url: https://github.com/robotian/orca4.git
-    version: main
+    version: ns_compatible
 
   multiple_orca:
     type: git
