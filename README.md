@@ -1,3 +1,14 @@
+# TUR_WS 
+This project is for multiple tethered ROV simulation using ROS2 and Gazebo. It is a fork from [ORCA4](https://github.com/clydemcqueen/orca4).
+
+
+## Installation
+
+See the [Dockerfile](.devcontainer/Dockerfile) for installation details.
+
+
+
+
 # VSCode ROS2 Workspace Template
 
 This template will get you set up using ROS2 with VSCode as your IDE.
