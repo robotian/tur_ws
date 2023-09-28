@@ -1,3 +1,53 @@
+# TUR_WS 
+
+This project is for multiple tethered ROV simulation using ROS2 and Gazebo. It is a fork from [ORCA4](https://github.com/clydemcqueen/orca4).
+
+
+## Development Environment
+
+Setting VSCode for ROS development using a Dev Container is explained well in this [repo](https://github.com/athackst/vscode_ros2_workspace).
+
+Recommended Tools:
+* Visual Studio Code
+* Docker
+* Git(of course) 
+
+## Installation
+
+See the [Dockerfile](.devcontainer/Dockerfile) for installation details.
+
+Install these packages:
+* [ROS2 Humble](https://docs.ros.org/en/humble/Installation.html)
+* [Gazebo Garden 7.1.0](https://gazebosim.org/docs/garden/install)
+* [ardupilot_gazebo](https://github.com/ArduPilot/ardupilot_gazebo)
+* [ArduSub](https://ardupilot.org/dev/docs/building-setup-linux.html)
+
+
+
+Build ArduSub for SITL:
+~~~
+cd ~/ardupilot
+./waf configure --board sitl
+./waf sub
+~~~
+
+Populate the workspace:
+~~~
+mkdir workspace
+cd workspace
+git clone -b ns_comp https://github.com/robotian/tur_ws.git --recurse-submodules
+~~~
+
+mavros
+
+
+
+
+
+
+
+
+
 # VSCode ROS2 Workspace Template
 
 This template will get you set up using ROS2 with VSCode as your IDE.

@@ -8,7 +8,7 @@
             "label": "build",
             "detail": "Build workspace (default)",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "./ws_build.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -19,7 +19,7 @@
             "label": "debug",
             "detail": "Build workspace (debug)",
             "type": "shell",
-            "command": "./build.sh",
+            "command": "./ws_build.sh",
             "options": {
                 "env": {
                     "BUILD_TYPE": "Debug"
@@ -226,7 +226,7 @@
             "label": "setup",
             "detail": "Set up the workspace",
             "type": "shell",
-            "command": "./setup.sh",
+            "command": "./ws_setup.sh",
             "problemMatcher": []
         },
         {
